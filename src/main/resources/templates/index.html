@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>迅哥社区</title>
+  <title>focus社区</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -11,13 +11,11 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">迅哥社区</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">focus社区</span>
       </button>
-      <a class="navbar-brand" href="#">迅哥社区</a>
+      <a class="navbar-brand" href="#">focus社区</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form class="navbar-form navbar-left">
@@ -28,21 +26,43 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" th:if="${session.user!=null}">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getId()}"><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">消息中心</a></li>
             <li><a href="#">个人资料</a></li>
             <li><a href="#">退出登录</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
           </ul>
         </li>
         <li th:if="${session.user==null}">
-          <a href="https://github.com/login/oauth/authorize?client_id=Iv1.9eb6014ed6cefc99&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+          <a href="https://github.com/login/oauth/authorize?client_id=e6f428d37a4e970088f5&redirect_uri=http://localhost:8899/callback&scope=user&state=1">登录</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<div class="container-fluid main">
+  <div class="row">
+    <div class="col-lg-9 col-md12 col-sm-12 col-xs-12">
+      <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现 </h2>
+      <hr>
+      <div class="media" th:each="question:${questions}">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object img-rounded"
+                 th:src="${question.user.avatarUrl}">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading" th:text="${question.title}"></h4>
+          <span th:text="${question.description}"></span> <br>
+          <span class="text-desc"><span th:text="${question.commentCount}"></span>个回复``<span
+                  th:text="${question.viewcount}"></span>次浏览·1小时前</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-12 col-xs-12"></div>
+  </div>
+</div>
 </body>
 </html>
